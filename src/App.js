@@ -1,10 +1,38 @@
+import { Button } from "@mui/material";
+import faker from "faker";
 import React from "react";
 import { connect } from "react-redux";
-
+import { If, Then, Else } from "react-if";
 import { newCart } from "./action";
+import Categories from "./components/Categories";
+import StickyFooter from "./components/Footer";
+import Header from "./components/Header";
 
 const App = ({ cart, newCart }) => {
-  return <button onClick={() => newCart({ id: 1 })}>Start Shopping!</button>;
+  const [isReadyForShopping, setIsReadyForShopping] = React.useState(false);
+  return (
+    <>
+      <Header />
+      <If condition={isReadyForShopping}>
+        <Then>
+          <Categories />
+        </Then>
+        <Else>
+          <Button
+            variant="contained"
+            onClick={() => {
+              newCart({ id: faker.datatype.uuid() });
+              setIsReadyForShopping(true);
+            }}
+          >
+            Start Shopping!
+          </Button>
+        </Else>
+      </If>
+
+      <StickyFooter />
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({
