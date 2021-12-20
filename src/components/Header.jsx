@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import React from "react";
-import { ShoppingCart } from "@mui/icons-material";
+import SimpleCart from "./SimpleCart";
+
 function Header() {
   return (
     <Container
@@ -14,8 +15,7 @@ function Header() {
       }}
     >
       <h2>Our Store</h2>
-
-      <ShoppingCart />
+      <SimpleCart />
     </Container>
   );
 }

@@ -14,6 +14,8 @@ export default function Product({
   inventoryCount,
   name,
   price,
+  addItem,
+  id,
 }) {
   return (
     <Grid item xs={4}>
@@ -33,10 +35,27 @@ export default function Product({
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Add to Cart</Button>
+          <Button
+            size="small"
+            onClick={() =>
+              addItem({
+                item: {
+                  id,
+                  category,
+                  description,
+                  image,
+                  inventoryCount,
+                  name,
+                  price,
+                },
+              })
+            }
+          >
+            Add to Cart
+          </Button>
           <Button size="small">view details</Button>
         </CardActions>
-      </Card>{" "}
+      </Card>
     </Grid>
   );
 }
