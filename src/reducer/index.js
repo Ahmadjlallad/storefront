@@ -1,30 +1,49 @@
-import faker from "faker";
 import { combineReducers } from "redux";
-const items = [];
-let category = faker.commerce.department();
-for (let i = 0; i < 10; i++) {
-  if (i === 5) category = faker.commerce.department();
-  items.push({
-    category,
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    price: faker.commerce.price(),
-    inventoryCount: faker.random.alphaNumeric(),
-    image: faker.random.image(),
-  });
-}
-let initialState = { customerId: null, items };
+import {
+  ADD_ITEM,
+  INITIALIZE,
+  DELETE_ITEM,
+  CHANGE_QUANTITY,
+} from "../action/constant";
+
+let initialState = { customerId: null, items: [] };
 
 const myReducer = (state = initialState, action) => {
   let { type, payload } = action;
 
   switch (type) {
-    case "INITIALIZE":
+    case INITIALIZE:
       return { ...state, customerId: payload.id };
-
-    case "ADD_ITEM":
-      return { items: [...state.items, payload.item] };
-
+    case ADD_ITEM:
+      const checkQuantity = state.items.find(
+        ({ id }) => id === payload.item.id
+      );
+      if (checkQuantity) {
+        checkQuantity.quantity = checkQuantity.quantity + 1;
+        return {
+          items: [...state.items],
+        };
+      }
+      return {
+        items: [
+          ...state.items,
+          {
+            ...payload.item,
+            quantity: 1,
+          },
+        ],
+      };
+    case DELETE_ITEM:
+      const filteredItems = state.items.filter(({ id }) => id !== payload.id);
+      return {
+        items: [...filteredItems],
+      };
+    case CHANGE_QUANTITY:
+      const changeQuantity = state.items.find(({ id }) => id === payload.id);
+      changeQuantity.quantity = changeQuantity.quantity + payload.singe;
+      return {
+        items: [...state.items],
+      };
     case "CLEAR":
       return initialState;
 
@@ -32,4 +51,5 @@ const myReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default combineReducers({ cart: myReducer });

@@ -10,7 +10,7 @@ function Copyright() {
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Store Front
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>

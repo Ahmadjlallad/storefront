@@ -7,7 +7,7 @@ import { newCart } from "./action";
 import Categories from "./components/Categories";
 import StickyFooter from "./components/Footer";
 import Header from "./components/Header";
-
+import data from "./components/data";
 const App = ({ cart, newCart }) => {
   const [isReadyForShopping, setIsReadyForShopping] = React.useState(false);
   return (
@@ -15,7 +15,7 @@ const App = ({ cart, newCart }) => {
       <Header />
       <If condition={isReadyForShopping}>
         <Then>
-          <Categories />
+          <Categories data={data} />
         </Then>
         <Else>
           <Button
