@@ -20,6 +20,7 @@ const myReducer = (state = initialState, action) => {
       );
       if (checkQuantity) {
         checkQuantity.quantity = checkQuantity.quantity + 1;
+        checkQuantity.inventoryCount = checkQuantity.inventoryCount - 1;
         return {
           items: [...state.items],
         };
@@ -30,6 +31,7 @@ const myReducer = (state = initialState, action) => {
           {
             ...payload.item,
             quantity: 1,
+            inventoryCount: payload.item.inventoryCount - 1,
           },
         ],
       };
@@ -41,6 +43,8 @@ const myReducer = (state = initialState, action) => {
     case CHANGE_QUANTITY:
       const changeQuantity = state.items.find(({ id }) => id === payload.id);
       changeQuantity.quantity = changeQuantity.quantity + payload.singe;
+      changeQuantity.inventoryCount =
+        changeQuantity.inventoryCount - payload.singe;
       return {
         items: [...state.items],
       };

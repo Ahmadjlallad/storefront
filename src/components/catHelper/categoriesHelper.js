@@ -1,7 +1,8 @@
 import { Button, ButtonGroup } from "@mui/material";
-export const makeCategoriesBtn = (data, setActiveItems) => {
+export const makeCategoriesBtn = (data = [], setActiveItems) => {
   const btn = [];
   const cag = [];
+
   data.forEach((item, i) => {
     if (!cag.includes(item.category)) {
       cag.push(item.category);
@@ -26,7 +27,7 @@ export const makeCategoriesBtn = (data, setActiveItems) => {
   );
   return [btn, cag];
 };
-export const makeCat = (data, cat) => {
+export const makeCat = (data = [], cat) => {
   if (cat === "all") return data;
   return data.filter((item) => item.category === cat);
 };
