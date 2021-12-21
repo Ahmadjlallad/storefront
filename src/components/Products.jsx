@@ -33,6 +33,9 @@ export default function Product({
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Inventory Count: {inventoryCount}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button

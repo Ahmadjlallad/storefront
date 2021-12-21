@@ -7,15 +7,14 @@ import { newCart } from "./action";
 import Categories from "./components/Categories";
 import StickyFooter from "./components/Footer";
 import Header from "./components/Header";
-import data from "./components/data";
-const App = ({ cart, newCart }) => {
+const App = ({ newCart }) => {
   const [isReadyForShopping, setIsReadyForShopping] = React.useState(false);
   return (
     <>
       <Header />
       <If condition={isReadyForShopping}>
         <Then>
-          <Categories data={data} />
+          <Categories />
         </Then>
         <Else>
           <Button
@@ -35,9 +34,7 @@ const App = ({ cart, newCart }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = { newCart };
 
