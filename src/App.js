@@ -7,30 +7,41 @@ import { newCart } from "./action";
 import Categories from "./components/Categories";
 import StickyFooter from "./components/Footer";
 import Header from "./components/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProductDetails from "./components/ProductDetails";
+import ShoppingCart from "./components/ShoppingCart";
 const App = ({ newCart }) => {
   const [isReadyForShopping, setIsReadyForShopping] = React.useState(false);
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <If condition={isReadyForShopping}>
-        <Then>
-          <Categories />
-        </Then>
-        <Else>
-          <Button
-            variant="contained"
-            onClick={() => {
-              newCart({ id: faker.datatype.uuid() });
-              setIsReadyForShopping(true);
-            }}
-          >
-            Start Shopping!
-          </Button>
-        </Else>
-      </If>
-
+      <Routes>
+        <Route path="/cart" element={<ShoppingCart />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route
+          path="/"
+          element={
+            <If condition={isReadyForShopping}>
+              <Then>
+                <Categories />
+              </Then>
+              <Else>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    newCart({ id: faker.datatype.uuid() });
+                    setIsReadyForShopping(true);
+                  }}
+                >
+                  Start Shopping!
+                </Button>
+              </Else>
+            </If>
+          }
+        />
+      </Routes>
       <StickyFooter />
-    </>
+    </BrowserRouter>
   );
 };
 

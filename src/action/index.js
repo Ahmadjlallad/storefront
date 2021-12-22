@@ -7,7 +7,10 @@ export const newCart = (customer) => {
   };
 };
 export const addItem = (item) => async (dispatch, getState) => {
+  if (!item.item) item.item = item;
   const a = item.item;
+  console.log(item.item);
+  console.log(item);
   await api.put(`/${a.id}`, {
     inventoryCount: a.inventoryCount - 1,
   });
