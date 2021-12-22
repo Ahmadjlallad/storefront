@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import SimpleCart from "./SimpleCart";
 
 function Header() {
@@ -14,7 +15,11 @@ function Header() {
         alignItems: "center",
       }}
     >
-      <h2>Our Store</h2>
+      <h3>
+        <NavLink to={"/"} style={{ textDecoration: "none" }}>
+          Our Store
+        </NavLink>
+      </h3>
       <SimpleCart />
     </Container>
   );

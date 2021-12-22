@@ -16,7 +16,9 @@ import { green, red } from "@mui/material/colors";
 import { changeQuantity, deleteItem } from "../action";
 import { If, Then } from "react-if";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { useNavigate } from "react-router-dom";
 const SimpleCart = ({ items, changeQuantity, deleteItem }) => {
+  const nav = useNavigate();
   return (
     <div
       style={{
@@ -35,7 +37,12 @@ const SimpleCart = ({ items, changeQuantity, deleteItem }) => {
             {items.map((item) => (
               <ListItem disablePadding key={item.id}>
                 <ListItemButton>
-                  <ListItemText primary={item.name} />
+                  <ListItemText
+                    primary={item.name}
+                    onClick={() => {
+                      nav("/cart");
+                    }}
+                  />
                   <If condition={item.quantity > 1}>
                     <Then>
                       <Fab
